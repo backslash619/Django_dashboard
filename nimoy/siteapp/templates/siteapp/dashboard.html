@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% load static from staticfiles %}
+{% load socialaccount %}
+{% load staticfiles %}
+{% block content %}
+<div class="container-fluid content">
+    <div class="row">
+        <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar indexpad">
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Overview <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'siteapp:chart' %}">Analytics</a>
+                </li>
+            </ul>
+        </nav>
+        <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
+            <div class="row indexmar">
+                <div class="col-4 mx-auto">
+                    <h2>Project List</h2>
+                </div>
+
+                <div class="col-4 mx-auto">
+                    <a class="btn btn-primary" href="{% url 'siteapp:create' %}" role="button">Create Project</a>
+                </div>
+            </div>
+            <div class="row text-center">
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    {% if user.is_authenticated %}
+                    <p>{{ user.get_username }} {{ message }}</p>
+                    {% else %}
+                    <p>User</p>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            <div class="row border">
+                {% for project in projects %}
+                <div class="col-4 mx-auto indexpad">
+                    <div class="card indexmar">
+                        <div class="card-body">
+                            <h4 class="card-title"><a href="{% url 'siteapp:detail' pk=project.pk %}">{{ project }}</a>
+                            </h4>
+                            <p class="card-text">{{ project.description|slice:"30" }}...<a
+                                    href="{% url 'siteapp:detail' pk=project.pk %}">Read more</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </main>
+    </div>
+</div>
+{% endblock %}

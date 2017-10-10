@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% load static from staticfiles %}
+{% load socialaccount %}
+{% load staticfiles %}
+{% block content %}
+<!-- Begin page content -->
+<div class="container indexmar">
+    <div class="mt-1">
+        <h1>{{ get_project }}</h1>
+    </div>
+    <p class="lead">
+        {{ get_project.description }}
+    </p>
+    <a href="{% url 'siteapp:edit' pk=get_project.pk %}" class="btn btn-primary btn-sm">Edit</a>
+</div>
+{% endblock %}

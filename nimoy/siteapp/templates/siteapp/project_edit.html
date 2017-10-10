@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% load static from staticfiles %}
+{% load socialaccount %}
+{% load bootstrap3 %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container-fluid indexpad">
+    <h1>New Project</h1>
+    <form method="POST" class="post-form">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button type="submit" class="save btn btn-default">Create</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% load static from staticfiles %}
+
+{% load socialaccount %}
+
+{% load staticfiles %}
+
+{% block content %}
+{% if not user.is_authenticated %}
+<div class="container indexpad">
+    <div class="row">
+        <div class="col-4 mx-auto">
+            <a class="btn btn-lg btn-social btn-facebook social-link" href="{% provider_login_url 'facebook' %}">
+                <i class="fa fa-facebook fa-fw"></i> Sign in with Facebook
+            </a>
+            <a class="btn btn-lg btn-social btn-google social-link" href="{% provider_login_url 'google' %}">
+                <i class="fa fa-google fa-fw"></i> Sign in with Google
+            </a>
+            <a class="btn btn-lg btn-social btn-twitter social-link" href="{% provider_login_url 'twitter' %}">
+                <i class="fa fa-twitter fa-fw"></i> Sign in with Twitter
+            </a>
+        </div>
+    </div>
+</div> <!-- /container -->
+{% else %}
+<div class="container">
+    <div class="row">
+        <main class="col-4 mx-auto indexmar" role="main">
+            <h1>Homepage</h1>
+            {% if user.is_authenticated %}
+            <p>Welcome, {{ user.get_username }}. Thanks for logging in.</p>
+            {% else %}
+            <p>Welcome, new user. Please log in.</p>
+            {% endif %}
+        </main>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
