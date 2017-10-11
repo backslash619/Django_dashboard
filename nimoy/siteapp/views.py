@@ -1,14 +1,8 @@
 from django.contrib import messages
 from django.contrib.auth import logout
-from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
-from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
-from django.views.generic import View
-from rest_framework import authentication, permissions
-from rest_framework.response import Response
-from rest_framework.views import APIView
 
 from .forms import ProjectForm
 from .models import Project
@@ -53,6 +47,12 @@ def project_edit(request, pk=None):
     else:
         form = ProjectForm(instance=post)
     return render(request, 'siteapp/project_edit.html', {'form': form})
+
+
+def project_delete(request, pk=None):
+    get_object_or_404(Project, pk=pk).delete()
+    messages.success(request, 'deleted project!!')
+    return redirect('siteapp:dashboard')
 
 
 def project_detail(request, pk):

@@ -11,6 +11,8 @@
     <p class="lead">
         {{ get_project.description }}
     </p>
-    <a href="{% url 'siteapp:edit' pk=get_project.pk %}" class="btn btn-primary btn-sm">Edit</a>
+    <a href="{% url 'siteapp:edit' pk=get_project.pk %}" class="btn btn-primary btn-sm">Update</a>
+    <a href="{% url 'siteapp:delete' pk=get_project.pk %}" class="btn btn-primary btn-sm">Delete</a>
+
 </div>
 {% endblock %}
